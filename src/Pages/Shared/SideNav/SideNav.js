@@ -12,7 +12,7 @@ const SideNav = () => {
     }, []);
     return (
         <div>
-            <h1>this is sidenav {courses.length}</h1>
+            <h3>Courses</h3>
             <div>
                 {
                     courses.map(course => <p key={course.id}>

@@ -12,7 +12,7 @@ const Main = () => {
             <Header></Header>
             <Container>
                 <Row>
-                    <Col lg="3" className='border border-secondary d-none d-lg-block'>
+                    <Col lg="3" className=' d-none d-lg-block'>
                         <SideNav></SideNav>
                     </Col>
                     <Col lg='9'>

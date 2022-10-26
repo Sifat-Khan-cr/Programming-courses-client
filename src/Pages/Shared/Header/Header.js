@@ -6,12 +6,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import SideNav from '../SideNav/SideNav';
+import { useContext } from 'react';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
     const [dark, setdark] = useState(true);
     const darkHandler = () => setdark(!dark);
+    const { user } = useContext(AuthContext);
     return (
-        <div>
+        <div className='mb-5'>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container >
                     <Navbar.Brand><Link to="/">Sifat Programming Course</Link></Navbar.Brand>
@@ -24,6 +27,7 @@ const Header = () => {
                             <Nav.Link><Link className='text-white text-decoration-none' to="/">Courses</Link></Nav.Link>
                             <Nav.Link><Link className='text-white text-decoration-none' to="/faq">FAQ</Link></Nav.Link>
                             <Nav.Link><Link className='text-white text-decoration-none' to="/blog">Blog</Link></Nav.Link>
+                            <Nav.Link><Link className='text-white text-decoration-none' to="/blog">{user.name}</Link></Nav.Link>
                             {
                                 dark ? <Button onClick={darkHandler} variant="dark">Dark</Button> : <Button onClick={darkHandler} variant="light">Light</Button>
                             }
