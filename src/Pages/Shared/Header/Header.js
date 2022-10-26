@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import SideNav from '../SideNav/SideNav';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
+import { Image } from 'react-bootstrap';
 
 const Header = () => {
     const [dark, setdark] = useState(true);
@@ -27,7 +28,8 @@ const Header = () => {
                             <Nav.Link><Link className='text-white text-decoration-none' to="/">Courses</Link></Nav.Link>
                             <Nav.Link><Link className='text-white text-decoration-none' to="/faq">FAQ</Link></Nav.Link>
                             <Nav.Link><Link className='text-white text-decoration-none' to="/blog">Blog</Link></Nav.Link>
-                            <Nav.Link><Link className='text-white text-decoration-none' to="/blog">{user.name}</Link></Nav.Link>
+                            <Nav.Link><Link className='text-white text-decoration-none' to="/blog">{user?.displayName}</Link></Nav.Link>
+                            <Image style={{ height: '40px' }} roundedCircle src={user?.photoURL}></Image>
                             {
                                 dark ? <Button onClick={darkHandler} variant="dark">Dark</Button> : <Button onClick={darkHandler} variant="light">Light</Button>
                             }
