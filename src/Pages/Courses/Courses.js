@@ -5,7 +5,7 @@ import CourseCard from './CourseCard/CourseCard';
 const Courses = () => {
     const courses = useLoaderData();
     return (
-        <div>
+        <div className='d-flex flex-wrap'>
             {
                 courses.map(course => <CourseCard key={course.id} course={course}></CourseCard>)
             }
