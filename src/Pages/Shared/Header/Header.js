@@ -5,7 +5,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-// import logo from "../../../../public/logo192.png";
 import SideNav from '../SideNav/SideNav';
 
 const Header = () => {
