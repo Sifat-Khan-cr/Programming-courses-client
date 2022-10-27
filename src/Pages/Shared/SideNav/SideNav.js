@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const SideNav = () => {
     const [courses, setCourses] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/courses')
+        fetch('https://programming-courses-server-eight.vercel.app/courses')
             .then(res => res.json())
             .then(data => setCourses(data))
     }, []);
