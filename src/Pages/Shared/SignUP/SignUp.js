@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updataUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState("");
 
@@ -17,6 +17,7 @@ const SignUp = () => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
+        const picUrl = form.picUrl.value;
         const email = form.email.value;
         const password = form.password.value;
         const conPassword = form.conPassword.value;
@@ -29,9 +30,20 @@ const SignUp = () => {
                 form.reset();
                 navigate('/');
                 setError("");
+                handleUpdateProfile(name, picUrl);
 
             })
             .catch(error => setError(error.message));
+    }
+
+    const handleUpdateProfile = (name, photoUrl) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoUrl
+        }
+        updataUserProfile(profile)
+            .then(() => { })
+            .catch(error => console.error(error))
     }
     return (
         <div>
@@ -39,6 +51,11 @@ const SignUp = () => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Name</Form.Label>
                     <Form.Control name="name" type="text" placeholder="Enter your name" />
+
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>pic Url</Form.Label>
+                    <Form.Control name="picUrl" type="text" placeholder="Enter your picture url" />
 
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -64,6 +81,7 @@ const SignUp = () => {
                     {error}
                 </Form.Text>
             </Form>
+            <Link to="/logIn">Log-In</Link>
         </div>
     );
 };

@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import Form from 'react-bootstrap/Form';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const Login = () => {
@@ -52,6 +52,7 @@ const Login = () => {
                     {error}
                 </Form.Text>
             </Form>
+            <Link to="/signup">Sign-up</Link>
             <div className='mt-5'>
                 <Button onClick={googleHandler} variant="success">Google</Button>
                 <Button variant="success">Twitter</Button>
