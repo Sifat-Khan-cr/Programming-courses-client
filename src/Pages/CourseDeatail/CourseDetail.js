@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const CourseDetail = () => {
     const course = useLoaderData();
@@ -9,8 +9,9 @@ const CourseDetail = () => {
             <h2>Course detail of {name}</h2>
             <img src={image} alt="" />
             <p>{info}</p>
+            <button><Link to={`/course/premium/${id}`}>Premium</Link></button>
 
-        </div>
+        </div >
     );
 };
 
