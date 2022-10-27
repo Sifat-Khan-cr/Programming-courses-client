@@ -13,7 +13,7 @@ import { Image } from 'react-bootstrap';
 const Header = () => {
     const [dark, setdark] = useState(true);
     const darkHandler = () => setdark(!dark);
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     return (
         <div className='mb-5'>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -23,13 +23,22 @@ const Header = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             {/* <p><Link to="/login">Login</Link></p> */}
-                            <Nav.Link><Link className='text-white text-decoration-none' to="/login">Login</Link></Nav.Link>
-                            <Nav.Link><Link className='text-white text-decoration-none' to="/signUp">Sign-Up</Link></Nav.Link>
+                            <Nav.Link>{
+                                user?.uid ?
+                                    <>
+                                        <span>{user?.displayName}</span>
+                                        <Button onClick={logOut} variant="dark">Logout</Button>
+                                    </>
+                                    :
+                                    <>
+                                        <Link className='text-white text-decoration-none' to="/login">Login</Link>
+                                        <Link className='text-white text-decoration-none m-2' to="/signUp">Sign-Up</Link></>
+                            }</Nav.Link>
+
+                            <Image style={{ height: '40px' }} roundedCircle src={user?.photoURL}></Image>
                             <Nav.Link><Link className='text-white text-decoration-none' to="/">Courses</Link></Nav.Link>
                             <Nav.Link><Link className='text-white text-decoration-none' to="/faq">FAQ</Link></Nav.Link>
                             <Nav.Link><Link className='text-white text-decoration-none' to="/blog">Blog</Link></Nav.Link>
-                            <Nav.Link><Link className='text-white text-decoration-none' to="/blog">{user?.displayName}</Link></Nav.Link>
-                            <Image style={{ height: '40px' }} roundedCircle src={user?.photoURL}></Image>
                             {
                                 dark ? <Button onClick={darkHandler} variant="dark">Dark</Button> : <Button onClick={darkHandler} variant="light">Light</Button>
                             }

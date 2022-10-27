@@ -3,30 +3,49 @@ import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import Form from 'react-bootstrap/Form';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Login = () => {
-    const { googleHandler } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
+    const { googleHandler, logIn } = useContext(AuthContext);
+    const handleSubmit = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        logIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                setError("");
+                navigate('/');
+
+            })
+            .catch(error => setError(error.message))
+
+    }
     return (
         <div>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
+                    <Form.Control name="email" type="email" placeholder="Enter email" required />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
+                    <Form.Control name="password" type="password" placeholder="Password" required />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
+                <Form.Text className='text-danger'>
+                    {error}
+                </Form.Text>
             </Form>
             <div className='mt-5'>
                 <Button onClick={googleHandler} variant="success">Google</Button>
