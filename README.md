@@ -12,3 +12,6 @@ https://programming-courses-server-eight.vercel.app/courses
 
 firebase deploy:
 https://sifat-courses-ph-ass-10-ba47c.web.app/
+
+netlify deploy:
+https://ph-assaignment-10-sifat-courses-react.netlify.app/
